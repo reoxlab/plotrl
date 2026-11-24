@@ -1,0 +1,14 @@
+services:
+  plotx:
+    build: .
+    container_name: plotx
+    restart: unless-stopped
+    # Descomentar para mostrar el enlace «← Reox Lab» en el encabezado (default: 0).
+    # environment:
+    #   - PLOTX_BRAND_LINK=1
+    networks:
+      - sky-net
+
+networks:
+  sky-net:
+    external: true

@@ -1,0 +1,582 @@
+/* PlotX — estilos con la marca Reox Lab (vino, dorado, carbón) y cascarón visual TableX. */
+
+:root {
+  --vino: #80001e;
+  --vino-oscuro: #5f0016;
+  --vino-boton: #80001e;
+  --dorado: #cca757;
+  --carbon: #131315;
+  --fondo: #ffffff;
+  --panel: #ffffff;
+  --fondo-suave: #f3e1e5;
+  --seleccion: #f6dde1;
+  --borde: #e3c9cd;
+  --borde-fuerte: #d3adb4;
+  --texto-suave: #5b5560;
+  --error: #b31932;
+  --codigo-fondo: #131315;
+  --codigo-texto: #f3ead9;
+  --radio: 10px;
+}
+
+/* Tema oscuro: fondo carbón de la marca, texto claro, acentos vino y dorado. */
+[data-theme='dark'] {
+  --vino: #e08a99;
+  --vino-oscuro: #7e1f30;
+  --vino-boton: #a1273d;
+  --carbon: #f0ebe6;
+  --fondo: #131315;
+  --panel: #1d1d21;
+  --fondo-suave: #2b1e21;
+  --seleccion: #3a2429;
+  --borde: #3a2b2e;
+  --borde-fuerte: #574044;
+  --texto-suave: #b3a8ab;
+  --error: #ff7b8a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Montserrat, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: var(--carbon);
+  background: var(--fondo);
+  line-height: 1.45;
+}
+
+a {
+  color: var(--vino);
+}
+
+/* -- encabezado ----------------------------------------------------------- */
+
+.px-header {
+  border-bottom: 1px solid var(--borde);
+  background: var(--fondo);
+}
+
+.px-header-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1.05rem 1rem 0.95rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.px-header-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.px-brand {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 0.2rem;
+}
+
+.px-brand[hidden] {
+  display: none;
+}
+
+.px-brand:hover {
+  text-decoration: underline;
+}
+
+.px-header h1 {
+  margin: 0;
+  color: var(--vino);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.px-tagline {
+  margin: 0.25rem 0 0;
+  color: var(--texto-suave);
+  font-size: 0.94rem;
+}
+
+.px-theme-label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-left: auto;
+  padding-top: 0.15rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+  white-space: nowrap;
+}
+
+.px-theme-select,
+.px-select {
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.36rem 0.5rem;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 7px;
+  background: var(--panel);
+  color: var(--carbon);
+  cursor: pointer;
+}
+
+.px-theme-select:focus-visible,
+.px-select:focus-visible,
+.px-btn:focus-visible,
+.px-input:focus-visible {
+  outline: 2px solid var(--dorado);
+  outline-offset: 1px;
+}
+
+/* -- layout principal ----------------------------------------------------- */
+
+.px-main {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 8fr) minmax(0, 5fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.px-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .px-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+.px-panel {
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.px-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  background: var(--fondo-suave);
+  border-bottom: 1px solid var(--borde);
+}
+
+.px-panel-title {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--vino);
+}
+
+.px-panel-meta {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  font-weight: 600;
+}
+
+/* -- botones y barras ----------------------------------------------------- */
+
+.px-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--borde);
+  align-items: center;
+}
+
+.px-toolbar--bottom {
+  border-bottom: none;
+  border-top: 1px solid var(--borde);
+}
+
+.px-presets-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+  margin-right: 0.15rem;
+}
+
+.px-btn {
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 600;
+  padding: 0.4rem 0.72rem;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 7px;
+  background: var(--panel);
+  color: var(--carbon);
+  cursor: pointer;
+}
+
+.px-btn:hover:not(:disabled) {
+  border-color: var(--vino);
+  color: var(--vino);
+}
+
+.px-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.px-btn--primary {
+  background: var(--vino-boton);
+  border-color: var(--vino-boton);
+  color: #ffffff;
+}
+
+.px-btn--primary:hover:not(:disabled) {
+  background: var(--vino-oscuro);
+  border-color: var(--vino-oscuro);
+  color: #ffffff;
+}
+
+.px-btn--gold {
+  background: var(--dorado);
+  border-color: var(--dorado);
+  color: #131315;
+}
+
+.px-btn--gold:hover:not(:disabled) {
+  filter: brightness(0.95);
+  color: #131315;
+}
+
+.px-btn--sm {
+  padding: 0.3rem 0.55rem;
+  font-size: 0.8rem;
+}
+
+.px-btn--icon {
+  min-width: 2rem;
+  padding: 0.32rem 0.5rem;
+  text-align: center;
+}
+
+.px-spacer {
+  margin-left: auto;
+}
+
+.px-status {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--vino);
+}
+
+.px-status--error {
+  color: var(--error);
+}
+
+/* -- lienzo de gráfica ---------------------------------------------------- */
+
+.px-canvas-wrap {
+  padding: 0.75rem 0.85rem 0.5rem;
+  background: var(--panel);
+}
+
+.px-canvas {
+  display: block;
+  width: 100%;
+  height: 440px;
+  border: 1px solid var(--borde);
+  border-radius: 7px;
+  background: var(--panel);
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.px-canvas.is-dragging {
+  cursor: grabbing;
+}
+
+@media (max-width: 600px) {
+  .px-canvas {
+    height: 320px;
+  }
+}
+
+.px-canvas-hint {
+  margin: 0.45rem 0 0;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem 1rem;
+}
+
+.px-tangent-readout {
+  font-weight: 600;
+  color: var(--vino);
+}
+
+/* -- panel de funciones --------------------------------------------------- */
+
+.px-fn-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 0.85rem 1rem;
+}
+
+.px-fn-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.px-fn-row--error {
+  border-color: var(--error);
+}
+
+.px-fn-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.px-fn-tag {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--vino);
+  min-width: 2.7rem;
+}
+
+.px-color-input {
+  width: 2.1rem;
+  height: 1.85rem;
+  padding: 0.1rem;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 6px;
+  background: var(--panel);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.px-input {
+  font: inherit;
+  font-size: 0.88rem;
+  padding: 0.38rem 0.55rem;
+  border: 1px solid var(--borde-fuerte);
+  border-radius: 7px;
+  background: var(--panel);
+  color: var(--carbon);
+}
+
+.px-input--expr {
+  flex: 1 1 11rem;
+  min-width: 8rem;
+  font-family: ui-monospace, 'Cascadia Code', 'Fira Code', Menlo, Consolas,
+    monospace;
+}
+
+.px-input--num {
+  width: 5.5rem;
+}
+
+.px-input--text {
+  width: 100%;
+}
+
+.px-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--carbon);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.px-check input[type='checkbox'] {
+  accent-color: var(--vino-boton);
+  cursor: pointer;
+}
+
+.px-fn-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem 0.85rem;
+  padding-left: 0.1rem;
+  min-height: 1.5rem;
+}
+
+.px-katex {
+  font-size: 0.95rem;
+  color: var(--carbon);
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.px-roots-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+  white-space: nowrap;
+}
+
+.px-error-msg {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--error);
+}
+
+/* -- importar datos ------------------------------------------------------- */
+
+.px-sheet-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--borde);
+  align-items: center;
+  font-size: 0.86rem;
+  background: var(--fondo-suave);
+}
+
+.px-sheet-picker[hidden] {
+  display: none;
+}
+
+.px-dataset-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 1rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.px-dataset-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--borde);
+  border-radius: 7px;
+  font-size: 0.85rem;
+}
+
+.px-dataset-name {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.px-dataset-count {
+  margin-left: auto;
+  color: var(--texto-suave);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.px-empty-note {
+  margin: 0;
+  padding: 0.7rem 1rem 0.85rem;
+  font-size: 0.83rem;
+  color: var(--texto-suave);
+}
+
+/* -- panel de código Python ----------------------------------------------- */
+
+.px-code {
+  margin: 0;
+  padding: 1rem;
+  min-height: 18rem;
+  max-height: 30rem;
+  overflow: auto;
+  background: var(--codigo-fondo);
+  color: var(--codigo-texto);
+  font-family: ui-monospace, 'Cascadia Code', 'Fira Code', Menlo, Consolas,
+    monospace;
+  font-size: 0.83rem;
+  line-height: 1.55;
+  white-space: pre;
+}
+
+.px-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  align-items: center;
+  border-top: 1px solid var(--borde);
+}
+
+/* -- opciones de vista y etiquetas ---------------------------------------- */
+
+.px-view-body {
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.px-range-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem 0.85rem;
+}
+
+.px-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+}
+
+.px-field-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.1rem;
+}
+
+.px-labels-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem 0.85rem;
+}
+
+.px-labels-grid .px-field--full {
+  grid-column: 1 / -1;
+}
+
+/* -- pie ------------------------------------------------------------------ */
+
+.px-footer {
+  max-width: 1440px;
+  margin: 0.5rem auto 0;
+  padding: 0.75rem 1rem 2rem;
+  border-top: 1px solid var(--borde);
+  font-size: 0.82rem;
+  color: var(--texto-suave);
+  line-height: 1.6;
+}
