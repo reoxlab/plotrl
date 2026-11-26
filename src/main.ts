@@ -263,7 +263,9 @@ app.innerHTML = `
     </div>
   </main>
 
-  <div id="suggest-box"></div>
+  <div class="px-suggest-wrap">
+    <div id="suggest-box"></div>
+  </div>
 
   <footer class="px-footer">
     PlotRL es software libre (GPL v3): puedes usarlo, estudiarlo, modificarlo y
