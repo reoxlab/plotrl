@@ -1,4 +1,4 @@
-# PlotX
+# PlotRL
 
 Graficador de funciones matemáticas en el navegador con generación en vivo de
 código Python (Matplotlib). Hecho en Reox Lab.
@@ -8,18 +8,20 @@ tangentes, importa tus propios datos y copia un script completo en Python que
 reproduce exactamente la gráfica visible. Sin cuentas, sin servidor y sin que
 tus datos salgan de tu navegador.
 
-- **Web:** https://reoxlab.com/herramientas/plotx
+- **Web:** https://reoxlab.com/herramientas/plotrl
 - **Demo local:** `npm install && npm run dev`
 - **Licencia:** GPL v3 (todo derivado sigue libre)
 
 ## Estado
+
+v1.1.0: añade el buzón de sugerencias (`rl-suggest`) integrado antes del pie de página.
 
 v1.0: graficador completo con 1 a 4 funciones en vivo, raíces, derivada y
 tangente, importar datos (CSV, TSV, texto plano, XLSX, XLS y ODS), código
 Python (Matplotlib) que reproduce la gráfica, presets docentes, exportar
 PNG/SVG, compartir por URL y temas claro, oscuro y sistema.
 
-## Qué puedes hacer con PlotX
+## Qué puedes hacer con PlotRL
 
 - **Funciones en vivo (1 a 4):** sintaxis intuitiva (`sin(x)`, `cos(x)`,
   `exp(-x^2)`, `sqrt(x)`, `ln(x)`, `x^3 - 3*x`, `pi`, `e`), fórmula renderizada
@@ -47,7 +49,7 @@ PNG/SVG, compartir por URL y temas claro, oscuro y sistema.
   operativo por defecto.
 - **Enlace a Reox Lab opcional:** el encabezado puede mostrar el enlace
   «← Reox Lab»; viene apagado por defecto y se enciende con la variable
-  `PLOTX_BRAND_LINK=1` al levantar el contenedor.
+  `PLOTRL_BRAND_LINK=1` al levantar el contenedor.
 
 ## Desarrollo local
 
@@ -64,6 +66,6 @@ npm test         # pruebas unitarias (parser, muestreo, importación, código Py
 
 ## Licencia
 
-PlotX es software libre bajo la licencia **GNU General Public License v3.0 o
+PlotRL es software libre bajo la licencia **GNU General Public License v3.0 o
 posterior** (`GPL-3.0-or-later`). Consulta el archivo [LICENSE](LICENSE) para
 más detalles.
