@@ -1,27 +1,28 @@
 // Copyright (C) 2026 Francisco Peña Gallardo (Reox Lab)
 //
-// This file is part of PlotX.
+// This file is part of PlotRL.
 //
-// PlotX is free software: you can redistribute it and/or modify
+// PlotRL is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 //
-// PlotX is distributed in the hope that it will be useful,
+// PlotRL is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with PlotX. If not, see <https://www.gnu.org/licenses/>.
+// along with PlotRL. If not, see <https://www.gnu.org/licenses/>.
 
-// PlotX — punto de entrada: construye la interfaz en `#app`, gestiona el estado
+// PlotRL — punto de entrada: construye la interfaz en `#app`, gestiona el estado
 // global y conecta parser, muestreo, gráfica Canvas/SVG, código Python, presets,
 // importación de datos, temas y enlaces compartibles.
 
 import 'katex/dist/katex.min.css'
 import './style.css'
 import katex from 'katex'
+import { renderSuggestBox } from 'rl-suggest'
 import { compileFunction, toLatex, type CompiledFunction } from './parser'
 import {
   derivativeSamples,
@@ -60,8 +61,8 @@ import {
 } from './theme'
 import { canvasToPngBlob, copyText, downloadBlob } from './ui'
 
-interface PlotxWindow extends Window {
-  PLOTX_CONFIG?: { brandLink?: number }
+interface PlotrlWindow extends Window {
+  PLOTRL_CONFIG?: { brandLink?: number }
   umami?: { track: (name: string, data?: Record<string, string>) => void }
 }
 
@@ -107,7 +108,7 @@ function defaultTitleFor(firstExpr: string): string {
 }
 
 function track(eventName: string, data?: Record<string, string>): void {
-  const w = window as PlotxWindow
+  const w = window as PlotrlWindow
   try {
     w.umami?.track(eventName, data)
   } catch {
@@ -123,7 +124,7 @@ app.innerHTML = `
     <div class="px-header-inner">
       <div class="px-header-text">
         <a id="brand-link" class="px-brand" href="https://reoxlab.com" hidden>← Reox Lab</a>
-        <h1>PlotX</h1>
+        <h1>PlotRL</h1>
         <p class="px-tagline">Graficador de funciones matemáticas con código Python (Matplotlib) listo para copiar</p>
       </div>
       <label class="px-theme-label">Tema
@@ -262,17 +263,19 @@ app.innerHTML = `
     </div>
   </main>
 
+  <div id="suggest-box"></div>
+
   <footer class="px-footer">
-    PlotX es software libre (GPL v3): puedes usarlo, estudiarlo, modificarlo y
+    PlotRL es software libre (GPL v3): puedes usarlo, estudiarlo, modificarlo y
     compartirlo. Código en
-    <a href="https://github.com/reoxlab/plotx">github.com/reoxlab/plotx</a>.
+    <a href="https://github.com/reoxlab/plotrl">github.com/reoxlab/plotrl</a>.
     Tus datos no salen de tu navegador: todo se calcula y grafica aquí mismo, sin servidor.
   </footer>
 `
 
 // -- Enlace de marca controlado por config.js (oculto por defecto) ------------
 const brandLink = document.querySelector<HTMLAnchorElement>('#brand-link')!
-if ((window as PlotxWindow).PLOTX_CONFIG?.brandLink === 1) {
+if ((window as PlotrlWindow).PLOTRL_CONFIG?.brandLink === 1) {
   brandLink.hidden = false
 }
 
@@ -306,6 +309,11 @@ const sheetImportBtn = document.querySelector<HTMLButtonElement>('#btn-sheet-imp
 const sheetCancelBtn = document.querySelector<HTMLButtonElement>('#btn-sheet-cancel')!
 const importStatusEl = document.querySelector<HTMLParagraphElement>('#import-status')!
 const datasetListEl = document.querySelector<HTMLUListElement>('#dataset-list')!
+
+renderSuggestBox(document.querySelector<HTMLDivElement>('#suggest-box')!, {
+  toolName: 'PlotRL',
+  onSend: () => track('plotrl-suggest-send'),
+})
 
 // -- Estado global ------------------------------------------------------------
 let nextId = 1
