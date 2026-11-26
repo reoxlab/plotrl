@@ -5,6 +5,9 @@ import {
   buildSuggestMailto,
   suggestSubject,
 } from 'rl-suggest'
+import { readFileSync } from 'node:fs'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 let passed = 0
 function test(name: string, fn: () => void): void {
@@ -26,7 +29,7 @@ test('buildSuggestMailto genera prefijo mailto y cuerpo codificado', () => {
 })
 
 test('texto con &, acentos y salto de línea se codifica sin romper subject ni body', () => {
-  const text = 'Más precisión en f(x) & g(x)\nSegunda línea con ñ y áéíóú'
+  const text = 'Más precisión en f(x) & g(x)\r\nSegunda línea con ñ y áéíóú'
   const url = buildSuggestMailto('PlotRL', text)
   const expectedPrefix =
     'mailto:contacto@reoxlab.com?subject=%5BSugerencia%20PlotRL%5D&body='
@@ -48,6 +51,16 @@ test('texto con &, acentos y salto de línea se codifica sin romper subject ni b
 test('SUGGEST_STYLE contiene .rl-suggest y var(--borde', () => {
   assert.ok(SUGGEST_STYLE.includes('.rl-suggest'))
   assert.ok(SUGGEST_STYLE.includes('var(--borde'))
+})
+
+test('main.ts cablea el buzón con toolName PlotRL y evento plotrl-suggest-send', () => {
+  const mainTs = readFileSync(
+    join(dirname(fileURLToPath(import.meta.url)), 'src', 'main.ts'),
+    'utf-8',
+  )
+  assert.ok(mainTs.includes('<div id="suggest-box">'), 'falta <div id="suggest-box"> en main.ts')
+  assert.ok(mainTs.includes("toolName: 'PlotRL'"), 'toolName incorrecto en main.ts')
+  assert.ok(mainTs.includes("track('plotrl-suggest-send')"), 'evento Umami incorrecto en main.ts')
 })
 
 console.log(`\nsuggest: ${passed} comprobaciones pasaron.`)
