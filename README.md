@@ -14,6 +14,8 @@ tus datos salgan de tu navegador.
 
 ## Estado
 
+v1.1.1: buzón de sugerencias centrado (rl-suggest v1.0.1: límite 500, CRLF, contador).
+
 v1.1.0: añade el buzón de sugerencias (`rl-suggest`) integrado antes del pie de página.
 
 v1.0: graficador completo con 1 a 4 funciones en vivo, raíces, derivada y
