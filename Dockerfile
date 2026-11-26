@@ -2,6 +2,7 @@ FROM node:22-alpine AS build
 WORKDIR /app
 
 COPY package*.json ./
+RUN apk add --no-cache git
 RUN npm ci || npm install
 
 COPY . .
