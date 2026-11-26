@@ -1,4 +1,4 @@
-/* PlotX — estilos con la marca Reox Lab (vino, dorado, carbón) y cascarón visual TableX. */
+/* PlotRL — estilos con la marca Reox Lab (vino, dorado, carbón) y cascarón visual TableRL. */
 
 :root {
   --vino: #80001e;
@@ -579,4 +579,9 @@ a {
   font-size: 0.82rem;
   color: var(--texto-suave);
   line-height: 1.6;
+}
+.px-suggest-wrap {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
